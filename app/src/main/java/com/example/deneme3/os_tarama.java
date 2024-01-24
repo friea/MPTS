@@ -47,22 +47,12 @@ public class os_tarama extends AppCompatActivity {
 
     }
     public void openOs_Tarama_Sayfasi(){
-        //--------------------Kullanıcıdan Veri Alma--------------------
-        EditText ipGiris = findViewById(R.id.ipNo);
-        String ipNo = ipGiris.getText().toString();
-        //--------------------Veri Ekleme-----------------------------------------------
-        Cursor mCursor = database.rawQuery("SELECT * FROM user_info", null);
-        Boolean rowExists;
-        if (mCursor.moveToFirst())
-        {
-            rowExists = true;
+        EditText ip = findViewById(R.id.ipNo);
+        String ip_veri = ip.getText().toString();
 
-        } else
-        {
-            database.execSQL("INSERT INTO user_info(ip,port) VALUES (ipNo,0)");
-            rowExists = false;
-        }
-        Intent intent = new Intent(this,os_tarama_sayfasi.class);
+        Intent intent = new Intent(this,null_tarama_sayfasi.class);
+        intent.putExtra("ip", ip_veri);
+
         startActivity(intent);
     }
 }

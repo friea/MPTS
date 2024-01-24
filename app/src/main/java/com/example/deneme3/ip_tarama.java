@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 public class ip_tarama extends AppCompatActivity {
@@ -40,7 +41,10 @@ public class ip_tarama extends AppCompatActivity {
 
     }
     public void openIp_Tarama_Sayfasi(){
+        EditText ip = findViewById(R.id.ipNo);
+        ip_veri = ip.getText().toString();
         Intent intent = new Intent(this,ip_tarama_sayfasi.class);
+        intent.putExtra("ip", ip_veri);
         startActivity(intent);
     }
 }

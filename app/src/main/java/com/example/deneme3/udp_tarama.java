@@ -45,24 +45,14 @@ public class udp_tarama extends AppCompatActivity {
 
     }
     public void openUdp_Tarama_Sayfasi(){
-        //--------------------Kullanıcıdan Veri Alma--------------------
-        EditText ipGiris = findViewById(R.id.ipNo);
-        EditText portGiris = findViewById(R.id.portNo);
-        String ipNo = ipGiris.getText().toString();
-        int portNo = Integer.parseInt(portGiris.getText().toString());
-        //--------------------Veri Ekleme-----------------------------------------------
-        Cursor mCursor = database.rawQuery("SELECT * FROM user_info", null);
-        Boolean rowExists;
-        if (mCursor.moveToFirst())
-        {
-            rowExists = true;
+        EditText port = findViewById(R.id.portNo);
+        String port_veri = port.getText().toString();
+        EditText ip = findViewById(R.id.ipNo);
+        String ip_veri = ip.getText().toString();
 
-        } else
-        {
-            database.execSQL("INSERT INTO user_info(ip,port) VALUES (ipNo,portNo)");
-            rowExists = false;
-        }
         Intent intent = new Intent(this,udp_tarama_sayfasi.class);
+        intent.putExtra("ip", ip_veri);
+        intent.putExtra("port", port_veri);
         startActivity(intent);
     }
 }

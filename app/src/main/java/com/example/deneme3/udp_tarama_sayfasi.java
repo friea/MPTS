@@ -23,31 +23,23 @@ public class udp_tarama_sayfasi extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_udp_tarama_sayfasi);
-//-------------veri çekme----------------------------------------
-        try {
-            database = openOrCreateDatabase("users", MODE_PRIVATE, null);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (intent != null) {
+            String ip = intent.getStringExtra("ip");
+            String port = intent.getStringExtra("port");
         }
-        @SuppressLint("Recycle") Cursor cursor_new = database.rawQuery("SELECT * FROM history", null);
-        int ip_konum = cursor_new.getColumnIndex("IP");
-        int port_konum = cursor_new.getColumnIndex("port");
+        // Python betiği
+        String pythonScript = "C:\\Users\\metis\\MPTS-master\\MPTS-master\\app\\src\\main\\scripts\\UDP_scan.py";
 
-        String ip = null;
-        int port = 0;
-        while (cursor_new.moveToNext()) {
-            port = cursor_new.getInt(port_konum);
-            ip = cursor_new.getString(ip_konum);
-        }
-//-------------chaquopy kütüphanesi işlemleri ---------------------------
-        if (!Python.isStarted()) {
-            Python.start(new AndroidPlatform(this));
-        }
-        Python py = Python.getInstance();
-        final PyObject pyobj = py.getModule("UDP");
-        PyObject obj = pyobj.callAttr("udp", ip, port, 5);
-        TextView udp_sonuc = findViewById(R.id.udp_sonuc);
-        udp_sonuc.setText(obj.toString());
+        // Python betiğine iletilen argümanlar
+        String[] pythonArgs = {ip, port};
+
+        // Python betiğini çalıştırma ve sonucu alma
+        String pythonSonucu = PythonRunner.runPythonScriptWithArgs(pythonScript, pythonArgs);
+
+        // Elde edilen sonucu yazdırma
+        System.out.println("Python Betiği Sonucu: " + pythonSonucu);
+        TextView os_sonuc = findViewById(R.id.udp_sonuc);
+        os_sonuc.setText(pythonSonucu.toString());
 
         btnBack = findViewById(R.id.back);
         btnBack.setOnClickListener(new View.OnClickListener() {

@@ -23,29 +23,23 @@ public class os_tarama_sayfasi extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_os_tarama_sayfasi);
-        //-------------veri çekme----------------------------------------
-        try {
-            database = openOrCreateDatabase("users",MODE_PRIVATE,null);
-        }catch (Exception e){
-            e.printStackTrace();
+        if (intent != null) {
+            String ip = intent.getStringExtra("ip");
+            String port = intent.getStringExtra("port");
         }
-        @SuppressLint("Recycle") Cursor cursor_new = database.rawQuery("SELECT * FROM history", null);
-        int ip_konum = cursor_new.getColumnIndex("IP");
-        int port_konum = cursor_new.getColumnIndex("port");
+        // Python betiği
+        String pythonScript = "C:\\Users\\metis\\MPTS-master\\MPTS-master\\app\\src\\main\\scripts\\OS_scan.py";
 
-        while(cursor_new.moveToNext()){
-            int port = cursor_new.getInt(port_konum);
-            String ip = cursor_new.getString(ip_konum);
-        }
-//-------------chaquopy kütüphanesi işlemleri ---------------------------
-        if(!Python.isStarted()){
-            Python.start(new AndroidPlatform(this));
-        }
-        Python py = Python.getInstance();
-        final PyObject pyobj = py.getModule("OS_detection");
-        PyObject obj = pyobj.callAttr("os");
+        // Python betiğine iletilen argümanlar
+        String[] pythonArgs = {ip, port};
+
+        // Python betiğini çalıştırma ve sonucu alma
+        String pythonSonucu = PythonRunner.runPythonScriptWithArgs(pythonScript, pythonArgs);
+
+        // Elde edilen sonucu yazdırma
+        System.out.println("Python Betiği Sonucu: " + pythonSonucu);
         TextView os_sonuc = findViewById(R.id.os_sonuc);
-        os_sonuc.setText(obj.toString());
+        os_sonuc.setText(pythonSonucu.toString());
 
         btnBack = findViewById(R.id.back);
         btnBack.setOnClickListener(new View.OnClickListener() {
