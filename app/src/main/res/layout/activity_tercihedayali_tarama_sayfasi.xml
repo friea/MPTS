@@ -37,5 +37,13 @@
         android:textSize="20dp"
         android:textColor="@color/white"
         tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/tercih_sonuc"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_centerInParent="true"
+        android:text="Sonuçlar Yükleniyor!"
+        tools:ignore="MissingConstraints"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
