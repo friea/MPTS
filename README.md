@@ -6,13 +6,8 @@
 
 ![image](https://github.com/friea/MPTS/assets/48139735/8a573b2b-1994-4481-baa3-ab1cb968cd1b)
 
-![image](https://github.com/friea/MPTS/assets/48139735/70764e04-542c-4493-8b47-c0013f46a49d)
-
-![image](https://github.com/friea/MPTS/assets/48139735/ee61e326-900a-4526-9025-fdb9de2f5c09)
-
 ![image](https://github.com/friea/MPTS/assets/48139735/2e3f2293-921b-4c8f-9368-aa0d990e482a)
 
-![image](https://github.com/friea/MPTS/assets/48139735/664dfaa3-957b-4f6c-817e-ac9772ecedd4)
 
 
 
